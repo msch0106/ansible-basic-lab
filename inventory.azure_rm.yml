@@ -1,0 +1,24 @@
+---
+plugin: azure.azcollection.azure_rm
+
+auth_source: auto
+
+hostvar_expressions:
+  ansible_host: name
+
+include_vm_resource_groups:
+  - '*'
+
+plain_host_names: true
+
+keyed_groups:
+  - prefix: tag
+    key: tags
+  - prefix: location
+    key: location
+  - prefix: os
+    key: os_profile.system
+
+conditional_groups:
+  windows: os_profile.system == "Windows"
+  linux: os_profile.system == "linux"

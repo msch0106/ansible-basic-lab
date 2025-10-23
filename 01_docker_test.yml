@@ -1,0 +1,41 @@
+---
+- name: Docker Collection test
+  hosts: localhost
+  gather_facts: true
+
+  tasks:
+    - name: Check if docker is installed
+      ansible.builtin.command: which docker
+      register: docker_check
+      changed_when: false
+      failed_when: false
+
+    - name: Show docker status
+      ansible.builtin.debug:
+        msg:  "{{ 'Docker is installed' if docker_check.rc == 0 else 'Docker is not installed' }}"
+
+    - name: List docker images
+      community.docker.docker_image_info:
+      register: images
+      when: docker_check.rc == 0
+
+    - name: Show docker image count
+      ansible.builtin.debug:
+        msg: "Found {{ images.images | length }} docker images"
+      when: docker_check.rc == 0
+
+    - name: Display docker images
+      ansible.builtin.debug:
+        msg: "{{ item.RepoTags | default(['<non>:<none>']) | first }} - {{ (item.Size / 1024 / 1024) | round(2)}} MB"
+      loop: "{{ images.images }}"
+      when:
+        - docker_check.rc == 0
+        - images.images | length > 0
+
+    - name: No docker images Found
+      ansible.builtin.debug:
+        msg: "No docker images found on this system"
+      when:
+        - docker_check.rc == 0
+        - images.images | length == 0
+        

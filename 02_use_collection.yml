@@ -1,0 +1,7 @@
+---
+- name: Deploy Nginx using collection
+  hosts: stockholm
+  gather_facts: true
+
+  roles:
+    - local.webserver.nginx_install

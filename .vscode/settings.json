@@ -1,0 +1,31 @@
+{
+  "yaml.schemas": {
+    "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/playbook": [
+      "file:///home/work13/git/ansible-basic-lab/01_filter.yml",
+      "file:///home/work13/git/ansible-basic-lab/01_inventory.yml",
+      "file:///home/work13/git/ansible-basic-lab/apache.yml",
+      "file:///home/work13/git/ansible-basic-lab/01_vault.yml",
+      "file:///home/work13/git/ansible-basic-lab/02_vault_file.yml",
+      "file:///home/work13/git/ansible-basic-lab/04_inline_vault.yml",
+      "file:///home/work13/git/ansible-basic-lab/05_multi_vault.yml",
+      "file:///home/work13/git/ansible-basic-lab/06_deploy_env.yml",
+      "file:///home/work13/git/ansible-basic-lab/01_docker_test.yml",
+      "file:///home/work13/git/ansible-basic-lab/02_use_collection.yml",
+      "file:///home/work13/git/ansible-basic-lab/01_windows.yml",
+      "file:///home/work13/git/ansible-basic-lab/02_windows_facts.yml",
+      "file:///home/work13/git/ansible-basic-lab/03_windows_commands.yml",
+      "file:///home/work13/git/ansible-basic-lab/01_install_openssh.yml",
+      "file:///home/work13/git/ansible-basic-lab/02_windows_ssh_test.yml",
+      "file:///home/work13/git/ansible-basic-lab/03_windows_ssh_facts.yml",
+      "file:///home/work13/git/ansible-basic-lab/04_copy_ssh_key.yml",
+      "file:///home/work13/git/ansible-basic-lab/01_install_ovirt.yml",
+      "file:///home/work13/git/ansible-basic-lab/03_query_database.yml",
+      "file:///home/work13/git/ansible-basic-lab/01_azure_test.yml",
+      "file:///home/work13/git/ansible-basic-lab/02_azure_tag_vm.yml",
+      "file:///home/work13/git/ansible-basic-lab/03_azure_verify_tag.yml"
+    ],
+    "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/inventory.json": "file:///home/work13/git/ansible-basic-lab/inventory.azure_rm.yml"
+  },
+  "python-envs.pythonProjects": [],
+  "python-envs.defaultEnvManager": "ms-python.python:venv"
+}

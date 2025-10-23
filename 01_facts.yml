@@ -1,0 +1,25 @@
+---
+- name: Facts Playbook
+  hosts: copenhagen
+  gather_facts: true
+
+  tasks:
+    - name: Show Facts
+      ansible.builtin.debug:
+        var: ansible_facts
+
+    - name: Show IP
+      ansible.builtin.debug:
+        var: ansible_facts['default_ipv4']['address']
+
+    - name: Show Distro
+      ansible.builtin.debug:
+        var: ansible_facts['distribution']
+
+    - name: Create Facts
+      ansible.builtin.set_fact:
+        ip: "{{ ansible_facts['default_ipv4']['address'] }}"
+
+    - name: Show ip-facts
+      ansible.builtin.debug:
+        var: ip

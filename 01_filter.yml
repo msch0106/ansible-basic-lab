@@ -1,0 +1,101 @@
+---
+- name: Filter Playbook
+  hosts: copenhagen
+  gather_facts: true
+
+  vars:
+    myname: "linux thOrvalds"
+    mynumber: "42"
+    mylist: [5, 2, 8, 1, 9, 2]
+  tasks:
+    - name: Show Original Values
+      ansible.builtin.debug:
+        msg:
+          - "Name: {{ myname }}"
+          - "Number: {{ mynumber }}"
+          - "List: {{ mylist }}"
+
+    - name: String Transformations
+      ansible.builtin.debug:
+        msg:
+          - "Original: {{ myname }}"
+          - "Upper case: {{ myname | upper }}"
+          - "Lower case: {{ myname | lower }}"
+          - "Capitalize: {{ myname | capitalize }}"
+          - "Title case: {{ myname | title }}"
+
+    - name: String replace
+      ansible.builtin.debug:
+        msg: "{{ 'Hello Ansible' | replace('Ansible', 'Automation') }}"
+
+    - name: Default filter
+      ansible.builtin.debug:
+        msg:
+          - "Defined variable: {{ myname | default('Unknown') }}"
+          - "Undefined varible: {{ undefined_var | default('Default Value') }}"
+
+    - name: Mandatory filter
+      ansible.builtin.debug:
+        msg: "This variable must exist: {{ myname | mandatory }}"
+
+    - name: Type Conversions
+      ansible.builtin.debug:
+        msg:
+          - "String to int: {{ mynumber | int }}"
+          - "Int to string: {{ 123 | string }}"
+          - "String to bool: {{ 'true' | bool }}"
+          - "Number to bool: {{ 0 | bool }}"
+
+    - name: Math with converted types
+      ansible.builtin.debug:
+        msg: "{{ mynumber | int + 10 }}"
+
+    - name: List operations
+      ansible.builtin.debug:
+        msg:
+          - "Original list: {{ mylist }}"
+          - "Minimum: {{ mylist | min }}"
+          - "Maximum: {{ mylist | max }}"
+          - "Sum: {{ mylist | sum }}"
+          - "Unique values: {{ mylist | unique }}"
+          - "Sorted: {{ mylist | sort }}"
+          - "Length: {{ mylist | length }}"
+
+    - name: First and last items
+      ansible.builtin.debug:
+        msg:
+          - "First Item: {{ mylist | first }}"
+          - "Last item: {{ mylist | last }}"
+
+    - name: Dicts to list
+      vars:
+        mydict:
+          name: server1
+          ip: 10.1.0.6
+          role: webserver
+      ansible.builtin.debug:
+        msg: "{{  mydict | dict2items }}"
+
+    - name: Get dicts keys and values
+      vars:
+        mydict:
+          color: blue
+          size: Large
+      ansible.builtin.debug:
+        msg:
+          - "keys: {{ mydict.keys() | list }}"
+          - "Values: {{ mydict.values() | list }}"
+
+    - name: Chained filters
+      ansible.builtin.debug:
+        msg:
+          - "{{ myname | upper | reverse }}"
+          - "{{ mylist | unique | sort | first }}"
+          - "{{ 'Hello World' | title | replace('World', 'Ansible') }}"
+
+    - name: Filter facts
+      ansible.builtin.debug:
+        msg: 
+          - "Hostname uppercase: {{ ansible_facts['hostname'] | upper }}"
+          - "Total memory in GB: {{ (ansible_facts['memtotal_mb'] / 1024) | round(2)}}"
+          - "All network interfaces: {{ ansible_facts['interfaces'] | join(', ')}}"

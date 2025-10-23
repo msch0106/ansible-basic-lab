@@ -1,0 +1,24 @@
+---
+- name: Install Apache
+  hosts: nordics
+  gather_facts: true
+
+  vars:
+    package_name: NotSet
+
+  tasks:
+    - name: Set package name to RedHat
+      ansible.builtin.set_fact:
+        package_name: httpd
+      when: ansible_facts['distribution'] == 'RedHat'
+
+    - name: Set package name to Ubuntu
+      ansible.builtin.set_fact:
+        package_name: apache2
+      when: ansible_facts['distribution'] == 'Ubuntu'
+
+    - name: Install Apache
+      ansible.builtin.package:
+        name: "{{ package_name }}"
+        state: present
+      become: true

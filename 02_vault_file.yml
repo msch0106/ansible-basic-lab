@@ -1,0 +1,15 @@
+---
+- name: Vault with password file
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - credentials.yml
+  
+  tasks:
+    - name: Show database connection
+      ansible.builtin.debug:
+        msg: "Connecting to {{ mysql_host }} as {{ mysql_user }}"
+
+    - name: Show AWS region
+      ansible.builtin.debug:
+        msg: "Using aws access key: {{ aws_access_key[:10] }}..."

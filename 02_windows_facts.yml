@@ -1,0 +1,25 @@
+---
+- name: Gather Windows System Information
+  hosts: windows
+  gather_facts: true
+
+  tasks:
+    - name: Display OS info
+      ansible.builtin.debug:
+        msg: 
+          - "OS: {{ ansible_os_family }}"
+          - "OS Name: {{ ansible_distribution }}"
+          - "OS Version: {{ ansible_distribution_version }}"
+          - "Hostname: {{ ansible_hostname }}"
+          - "Architecture: {{ ansible_architecture }}"
+    
+    - name: Dispaly Network info
+      ansible.builtin.debug:
+        msg: 
+          - "IP Address: {{ ansible_ip_addresses }}"
+          - "Domain: {{ ansible_domain | default('N/A') }}"
+
+    - name: Display Powershell version
+      ansible.builtin.debug:
+        msg: "Powershell Version: {{ ansible_powershell_version }}"
+      

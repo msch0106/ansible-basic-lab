@@ -1,0 +1,50 @@
+---
+- name: Variables Playbook
+  hosts: copenhagen
+
+  vars:
+    color1: green
+    color2: blue
+    colors: "show all the colors {{color2}} and {{color1}}"
+    color_list:
+      - yellow
+      - magenta
+      - cyan
+    spaceshuttles:
+      Columbia:
+        First_flight: April 12 1981
+        Total_Flights: 28
+      Challenger:
+        First_flight: April 4 1983
+        Total_Flights: 10
+      Discovery:
+        First_flight: August 30 1984
+        Total_Flights: 39
+      Atlantis:
+        First_flight: October 3 1985
+        Total_Flights: 33
+      Endeavour:
+        First_flight: May 7 1992
+        Total_Flights: 25
+    is_it_break_time: true
+
+  tasks:
+    - name: Show color1
+      ansible.builtin.debug:
+        msg: "{{ color1 }} and {{ color2 }}"
+
+    - name: Show all Colors
+      ansible.builtin.debug:
+        msg: "{{ colors }}"
+
+    - name: Show Color from color_list
+      ansible.builtin.debug:
+        msg: "{{ color_list[1] }}"
+
+    - name: Atlantis Total Total_Flights
+      ansible.builtin.debug:
+        msg: "{{ spaceshuttles['Atlantis']['Total_Flights'] }}"
+
+    - name: Is it break is_it_break_time
+      ansible.builtin.debug:
+        msg: "{{ is_it_break_time }}"

@@ -1,0 +1,12 @@
+---
+- name: Test Windows Connection
+  hosts: windows
+  gather_facts: false
+
+  tasks:
+    - name: Test connection with win_ping
+      ansible.windows.win_ping:
+
+    - name: Display succes message
+      ansible.builtin.debug:
+        msg: "Succesfully connected to {{ inventory_hostname }}"
